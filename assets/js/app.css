@@ -1,0 +1,22 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+form {
+    width: 500px;
+    margin: 50px auto;
+}
+
+#result {
+    top: 10px;
+}
+
+#result .item {
+    border-bottom: 1px solid #ccc;
+    padding: 5px;
+    margin-bottom: 5px;
+}
+#result .item .icon {
+    float: right;
+    cursor: pointer;
+}

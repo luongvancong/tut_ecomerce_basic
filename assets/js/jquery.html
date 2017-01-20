@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Jquery</title>
+    <style type="text/css">
+        div {
+            position: absolute;
+            border: 1px solid red;
+            background: red;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="result">
+        Hello
+        <span class="a">World</span>
+    </div>
+
+    <input type="text" id="input" name="">
+
+    <button id="btn-load-data">Load data</button>
+
+<script src="jquery-3.1.1.min.js"></script>
+<script type="text/javascript">
+    $(function() {
+
+        $('#btn-load-data').click(function() {
+            $.ajax({
+                url : 'http://localhost:8686/js/text.txt',
+                type : "GET",
+                data : {
+                    a : 'b'
+                },
+
+                success : function(response) {
+                    console.log(response);
+                    $('#result').text(response);
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>

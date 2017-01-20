@@ -1,0 +1,4 @@
+RewriteEngine On
+
+# Trang chi tiet san pham
+RewriteRule ^san-pham/([0-9]+)/([0-9a-zA-Z]+)$ product.php?id=$1&slug=$2
