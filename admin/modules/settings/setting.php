@@ -13,10 +13,30 @@ $companyName = array_get($_POST, 'company_name');
 $address = array_get($_POST, 'address');
 
 if($action == 'update') {
+
     $sql = "
-        UPDATE settings SET company_name = '". $companyName ."', address='". $address ."' WHERE id = 1
+        UPDATE settings SET company_name = '". $companyName ."', address='". $address ."'
     ";
+
+    if(isset($_FILES['logo'])) {
+        // $baseFilename = APP_PATH . '/uploads/' . $_FILES['logo']['name'];
+
+        // $info = new SplFileInfo($baseFilename);
+        // $ext = $info->getExtension();
+
+        // // Tên file mới
+        // $filename = md5($baseFilename) . '.' . $ext;
+
+        // move_uploaded_file($_FILES['logo']['tmp_name'], APP_PATH . '/uploads/' . $filename);
+
+        $filename = upload('logo');
+        $sql .= ", logo='". $filename ."'";
+    }
+
+    $sql .= " WHERE id = 1";
+
     mysqli_query($link, $sql);
+
     redirect($_SERVER['REQUEST_URI']);
 }
 

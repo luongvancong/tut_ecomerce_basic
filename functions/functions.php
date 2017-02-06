@@ -21,3 +21,23 @@ if( ! function_exists('redirect') ) {
         exit;
     }
 }
+
+if( ! function_exists('upload') ) {
+    /**
+     * Upload file
+     * @param  str $fileControl
+     * @return str
+     */
+    function upload($fileControl) {
+        $baseFilename = APP_PATH . '/uploads/' . $_FILES[$fileControl]['name'];
+        $info = new SplFileInfo($baseFilename);
+        $ext = $info->getExtension();
+
+        // Tên file mới
+        $filename = md5($baseFilename) . '.' . $ext;
+
+        move_uploaded_file($_FILES[$fileControl]['tmp_name'], APP_PATH . '/uploads/' . $filename);
+
+        return $filename;
+    }
+}

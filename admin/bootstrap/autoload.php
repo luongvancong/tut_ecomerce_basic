@@ -3,6 +3,9 @@ session_start();
 
 require_once __DIR__ . '/../../functions/functions.php';
 require_once __DIR__ . '/../../classes/Config.php';
+require_once __DIR__ . '/../../classes/Sort.php';
+
+define('APP_PATH', $_SERVER['DOCUMENT_ROOT']);
 
 define("ROOT", $_SERVER['DOCUMENT_ROOT'] . '/admin');
 

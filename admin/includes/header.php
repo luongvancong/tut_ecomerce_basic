@@ -35,6 +35,7 @@
                     <ul class="nav nav-sidebar">
                         <li><a href="/admin/modules/settings/setting.php">Setting</a></li>
                         <li><a href="/admin/modules/product_category/listing.php">Product Category</a></li>
+                        <li><a href="/admin/modules/products/listing.php"><i class="fa fa-cubes"></i> Products</a></li>
                     </ul>
                 </div>
                 <div class="col-sm-9 col-sm-offset-3">

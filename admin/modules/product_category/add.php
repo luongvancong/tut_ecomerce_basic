@@ -10,6 +10,11 @@
         $categories[] = $row;
     }
 
+
+    // Sắp xếp danh mục
+    $sortObj = new Sort($categories);
+    $categories = $sortObj->getCategories();
+
     // Add
     $action = array_get($_POST, 'action');
     $name = array_get($_POST, 'name');
@@ -55,7 +60,7 @@
                 <select class="form-control" name="parent_id">
                     <option value="">Parent</option>
                     <?php foreach($categories as $item): ?>
-                    <option value="<?php echo $item['id'] ?>"><?php echo $item['name'] ?></option>
+                    <option value="<?php echo $item['id'] ?>"><?php for($i = 0; $i < $item['level']; $i ++) echo '--'; ?><?php echo $item['name'] ?></option>
                     <?php endforeach; ?>
                 </select>
             </div>
