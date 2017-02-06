@@ -28,12 +28,13 @@
         <div class="container-fluid">
             <div class="pull-right">
                 <div>Hi <?php echo $_SESSION['login_name'] ?></div>
-                <a href="logout.php" class="text-right">Logout</a>
+                <a href="/admin/logout.php" class="text-right">Logout</a>
             </div>
             <div class="row">
                 <div class="col-sm-3 col-md-2 sidebar">
                     <ul class="nav nav-sidebar">
-                        <li><a href="user.php">Users</a></li>
+                        <li><a href="/admin/modules/settings/setting.php">Setting</a></li>
+                        <li><a href="/admin/modules/product_category/listing.php">Product Category</a></li>
                     </ul>
                 </div>
                 <div class="col-sm-9 col-sm-offset-3">

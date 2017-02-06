@@ -2,7 +2,7 @@
 require_once __DIR__ . '/bootstrap/autoload.php';
 
 // Neu chua dang nhap thi phai dang nhap
-if(isset($_SESSION['logged']) && $_SESSION['logged'] === 0) {
+if($_SESSION['logged'] === 0) {
     header('Location: login.php');
     exit;
 }

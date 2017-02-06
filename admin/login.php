@@ -39,7 +39,7 @@
 
             // Redirect va thong bao trang thai
             if(isset($_SESSION['logged']) && $_SESSION['logged'] === 1) {
-                header('Location: /admin.php');
+                header('Location: /admin');
                 exit;
             }
         }

@@ -7,7 +7,7 @@ if( ! function_exists('array_get') ) {
             if(isset($array[$k])) {
                 $array = $array[$k];
             } else {
-                $array[$k] = $default;
+                $array = $default;
             }
         }
         return $array;
