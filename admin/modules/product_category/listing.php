@@ -10,38 +10,6 @@ while ($row = mysqli_fetch_assoc($result)) {
     $tempCategories[] = $row;
 }
 
-// $categories = [];
-
-// foreach($tempCategories as $item) {
-//     foreach($tempCategories as $cat) {
-//         if($cat['parent_id'] == $item['id']) {
-//             $categories[$item['id']][$cat['id']] = $cat;
-//         } elseif($cat['parent_id'] == 0) {
-//             $categories[0][$cat['id']] = $cat;
-//         }
-//     }
-// }
-
-
-// Mảng chứa những danh mục đã được sắp xếp
-// $sortCategories = [];
-
-// function sortCategories($categories, $parentId = 0, $level = -1) {
-//     global $sortCategories;
-
-//     if(array_key_exists($parentId, $categories)) {
-//         $level ++;
-//         foreach($categories[$parentId] as $child) {
-//             $child['level'] = $level;
-//             $sortCategories[] = $child;
-//             sortCategories($categories, $child['id'], $level);
-//         }
-//     }
-// }
-
-// // Gọi hàm sắp xếp
-// sortCategories($categories);
-
 $sortObj = new Sort($tempCategories);
 $sortCategories = $sortObj->getCategories();
 

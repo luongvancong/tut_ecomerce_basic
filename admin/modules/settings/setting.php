@@ -19,16 +19,6 @@ if($action == 'update') {
     ";
 
     if(isset($_FILES['logo'])) {
-        // $baseFilename = APP_PATH . '/uploads/' . $_FILES['logo']['name'];
-
-        // $info = new SplFileInfo($baseFilename);
-        // $ext = $info->getExtension();
-
-        // // Tên file mới
-        // $filename = md5($baseFilename) . '.' . $ext;
-
-        // move_uploaded_file($_FILES['logo']['tmp_name'], APP_PATH . '/uploads/' . $filename);
-
         $filename = upload('logo');
         $sql .= ", logo='". $filename ."'";
     }

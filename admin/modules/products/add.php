@@ -1,6 +1,9 @@
 <?php
     require_once __DIR__ . '/../../bootstrap/autoload.php';
 
+    $mCategory = $application['category'];
+    $mProduct = $application['product'];
+
     // Lấy thông tin từ form
     $action = array_get($_POST, 'action');
     $name = array_get($_POST, 'name');
@@ -33,21 +36,36 @@
         if($price == 0) {
             $errors['price'] = 'Vui lòng nhập giá';
         }
-    }
 
+        if(empty($errors)) {
+            $data = [
+                'name'            => $name,
+                'price'           => $price,
+                'promotion_price' => $promotion_price,
+                'quantity'        => $quantity,
+                'teaser'          => $teaser,
+                'content'         => $content,
+                'category_id'     => $category_id
+            ];
+
+            // Nếu chọn ảnh để upload
+            if(isset($_FILES['image'])) {
+                $image = upload('image');
+                $data['image'] = $image;
+            }
+
+            $insertId = $mProduct->insert($data);
+
+            if($insertId > 0) {
+                redirect('listing.php?insert=1');
+            } else {
+                redirect('listing.php?insert=0');
+            }
+        }
+    }
 
     // Get categories
-    $sql = "SELECT * FROM product_categories";
-    $result = mysqli_query($link, $sql);
-
-    $categories = [];
-    while($row = mysqli_fetch_assoc($result)) {
-        $categories[] = $row;
-    }
-
-    // Sắp xếp danh mục
-    $sortObj = new Sort($categories);
-    $categories = $sortObj->getCategories();
+    $categories = $mCategory->getCategories();
 
 ?>
 
@@ -78,7 +96,7 @@
     </div>
 
     <div class="form-group <?php echo isset($errors['quantity']) ? 'has-error' : '' ?>">
-        <label class="control-label col-sm-3">Giá</label>
+        <label class="control-label col-sm-3">Số lượng</label>
         <div class="col-sm-6">
             <input type="text" name="quantity" value="<?php echo $quantity ?>" class="form-control">
             <?php if(isset($errors['quantity'])) : ?>
@@ -110,7 +128,7 @@
     <div class="form-group <?php echo isset($errors['category_id']) ? 'has-error' : '' ?>">
         <label class="control-label col-sm-3">Danh mục</label>
         <div class="col-sm-6">
-            <select class="form-control" name="parent_id">
+            <select class="form-control" name="category_id">
                 <option value="">Danh mục</option>
                 <?php foreach($categories as $item): ?>
                 <option value="<?php echo $item['id'] ?>"><?php for($i = 0; $i < $item['level']; $i ++) echo '--'; ?><?php echo $item['name'] ?></option>
@@ -134,7 +152,7 @@
 
     <div class="form-group <?php echo isset($errors['content']) ? 'has-error' : '' ?>">
         <label class="control-label col-sm-3">Mô tả</label>
-        <div class="col-sm-6">
+        <div class="col-sm-12">
             <textarea name="content" class="editor"><?php echo $content ?></textarea>
             <?php if(isset($errors['content'])) : ?>
                 <span class="help-block"><?php echo $errors['content'] ?></span>
