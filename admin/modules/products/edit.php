@@ -52,7 +52,7 @@
             ];
 
             // Nếu chọn ảnh để upload
-            if(isset($_FILES['image'])) {
+            if(isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
                 $image = upload('image');
                 $data['image'] = $image;
             }

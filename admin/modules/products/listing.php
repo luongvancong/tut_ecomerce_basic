@@ -29,6 +29,7 @@ $products = $mProduct->getProducts();
             <th>Price</th>
             <th>Quantity</th>
             <th>Category</th>
+            <th>Hot</th>
             <th width="30">Edit</th>
             <th width="30">Del</th>
         </thead>
@@ -43,6 +44,9 @@ $products = $mProduct->getProducts();
                     <td><?php echo $product['price'] ?></td>
                     <td><?php echo $product['quantity'] ?></td>
                     <td><?php echo $product['cat_name'] ?></td>
+                    <td>
+                        <a href="hot.php?id=<?php echo $product['id'] ?>" class="btn btn-xs <?php echo $product['hot'] == 1 ? 'btn-primary' : 'btn-default' ?>"><?php echo $product['hot'] == 1 ? 'Hot' : 'Normal' ?></a>
+                    </td>
                     <td>
                         <?php echo makeEditButton("edit.php?id=". $product['id']) ?>
                     </td>
