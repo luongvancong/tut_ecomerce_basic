@@ -1,6 +1,7 @@
 <?php
 session_start();
 
+
 require_once __DIR__ . '/../../functions/functions.php';
 require_once __DIR__ . '/../../classes/Config.php';
 
@@ -9,6 +10,16 @@ require_once __DIR__ . '/../../classes/Model.php';
 require_once __DIR__ . '/../../classes/Category.php';
 require_once __DIR__ . '/../../classes/Sort.php';
 require_once __DIR__ . '/../../classes/Product.php';
+
+// Nếu khác trang login thì phải check đăng nhập
+$scriptFileName = ['/admin/login.php'];
+if(!in_array($_SERVER['SCRIPT_NAME'], $scriptFileName)) {
+    // Neu chua dang nhap thi phai dang nhap
+    if($_SESSION['logged'] === 0) {
+        header('Location: /admin/login.php');
+        exit;
+    }
+}
 
 define('APP_PATH', $_SERVER['DOCUMENT_ROOT']);
 
