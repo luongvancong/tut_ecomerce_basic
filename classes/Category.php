@@ -2,7 +2,7 @@
 
 class Category extends Model {
 
-    protected $table = 'categories';
+    protected $table = 'product_categories';
 
     public function getCategories(array $filter = array(), array $sort = array()) {
 

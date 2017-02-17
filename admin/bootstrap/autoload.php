@@ -19,6 +19,9 @@ require_once __DIR__ . '/../../classes/Model.php';
 require_once __DIR__ . '/../../classes/Category.php';
 require_once __DIR__ . '/../../classes/Sort.php';
 require_once __DIR__ . '/../../classes/Product.php';
+require_once __DIR__ . '/../../classes/Order.php';
+require_once __DIR__ . '/../../classes/OrderDetail.php';
+require_once __DIR__ . '/../../classes/Pagination.php';
 
 define('APP_PATH', $_SERVER['DOCUMENT_ROOT']);
 
@@ -45,8 +48,11 @@ $application['database'] = $database;
 // Khai báo mảng chứa các đối tượng cần thiết
 $product = new Product($application);
 $category = new Category($application);
-
+$order = new Order($application); // Model order
+$orderDetail = new OrderDetail($application); // Model order detail
 
 $application['config']   = $config;
 $application['category'] = $category;
 $application['product']  = $product;
+$application['order']       = $order;
+$application['orderDetail'] = $orderDetail;

@@ -8,6 +8,9 @@ $currentPage = (int) array_get($_GET, 'page');
 $mCategory = $application['category'];
 $mProduct = $application['product'];
 
+// Thông tin danh mục
+$category = $mCategory->getById($categoryId);
+
 $perPage = 20;
 $products = $mProduct->getProducts($perPage, ['category_id' => $categoryId]);
 
@@ -34,7 +37,7 @@ $pagination = new Pagination($total, $perPage, $currentPage);
 </div>
 
 <div class="container_9 title-container">
-   <div class="page-title first-bg"> Furniture </div>
+   <div class="page-title first-bg"> <h1><?php echo $category['name'] ?></h1> </div>
    <div class="breadcrumb"> <a title="return to Home" href="/">Home</a> <span class="navigation-pipe">/</span> <span class="navigation_page">Living Room</span> </div>
 </div>
 

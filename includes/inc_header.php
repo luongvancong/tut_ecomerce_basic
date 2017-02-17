@@ -4,6 +4,18 @@
 
     $glbSetting = $application['setting']->getSetting();
 
+    $countItemCart = count($_SESSION['cart']);
+
+    // Model product
+    $mProduct = $application['product'];
+
+    // Lặp giỏ hàng để tính toán tổng tiền của các sản phẩm trong giỏ hàng
+    $totalMoneyItemCart = 0;
+    foreach($_SESSION['cart'] as $productId => $quantity) {
+        $product = $mProduct->getById($productId);
+        $totalMoneyItemCart += ($product['price'] * $quantity);
+    }
+
 ?><!DOCTYPE html>
 <!--[if lt IE 9]>
 <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -21,7 +33,7 @@
 <![endif]-->
 <html>
     <head>
-        <title>Online Sale</title>
+        <title><?php echo !isset($metadata['title']) ? 'Online Sale' : $metadata['title']?></title>
         <meta name="viewport" content="width=device-width; initial-scale=1.0;" />
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <link href="/assets/css/styles.css" rel="stylesheet" type="text/css" media="all" />
@@ -48,6 +60,7 @@
         <![endif]-->
         <link rel="stylesheet" href="/assets/css/iview.css" />
         <link rel="stylesheet" href="/assets/css/skin 4/style.css" />
+        <link rel="stylesheet" type="text/css" href="/assets/css/bs3/css/bootstrap.min.css">
         <script type="text/javascript" src="/assets/js/raphael-min.js"></script>
         <script type="text/javascript" src="/assets/js/jquery.easing.js"></script>
         <script src="/assets/js/iview.js"></script>
@@ -114,18 +127,18 @@
             <div class="navbar navbar-static top-links first-bg" >
                 <div class="navbar-inner container_9">
                     <ul id="header_nav" class="nav pull-right">
-                        <li ><i class="icon-shopping-cart"></i> <a href="#">Giỏ hàng</a></li>
+                        <li ><i class="icon-shopping-cart"></i> <a href="/cart_listing.php">Giỏ hàng</a></li>
                     </ul>
                 </div>
             </div>
             <!-- Header -->
             <header id="header" role="heading" class="third-bg" >
                 <div class="header-content container_9">
-                    <a title="onlinestore" href="home.html" class="logo "><img alt="logo" src="/assets/media/logo.jpg"></a>
+                    <a title="onlinestore" href="/" class="logo "><img alt="logo" src="/assets/media/logo.jpg"></a>
                     <div class="quick-access">
                         <ul>
                             <li > <a rel="nofollow" title="View my exchange" href="/" class="cart-btn first-bg" > <i class="icon-exchange"></i> </a> </li>
-                            <li > <a rel="nofollow" title="View my shopping cart" href="/" class="cart-btn  first-bg" > <i class="icon-shopping-cart"></i> </a> <span>0 - 0 VNĐ</span> </li>
+                            <li > <a rel="nofollow" title="View my shopping cart" href="/" class="cart-btn  first-bg" > <i class="icon-shopping-cart"></i> </a> <span><?php echo $countItemCart ?> - <?php echo formatCurrency($totalMoneyItemCart) ?> VNĐ</span> </li>
                         </ul>
                     </div>
                     <form method="get" action="index.php?controller=search" id="searchbox">
@@ -257,9 +270,9 @@
             <div class="sf-contener clearfix second-bg ">
                 <nav class="nav-wrap container_9">
                     <ul class="sf-menu clearfix  ">
-                        <li class="item"><a class="parent" href="home.html">Trang chủ</a> </li>
+                        <li class="item"><a class="parent" href="/">Trang chủ</a> </li>
                         <li class="item">
-                            <a class="parent" href="home.html">Sản phẩm</a>
+                            <a class="parent" href="javascript:;">Sản phẩm</a>
                             <ul>
                                 <?php foreach($categories as $item): ?>
                                 <li><a href="/category.php?id=<?php echo $item['id'] ?>"><?php echo $item['name'] ?></a></li>
@@ -267,7 +280,7 @@
                             </ul>
                         </li>
 
-                        <li class="item"><a class="parent"  href="/cart.php">Giỏ hàng</a></li>
+                        <li class="item"><a class="parent"  href="/cart_listing.php">Giỏ hàng</a></li>
                         <li class="item"><a class="parent" href="/post.php">Tin tức</a>
                         </li>
                     </ul>

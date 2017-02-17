@@ -137,3 +137,12 @@ function makeActiveButton($link, $currentActiveValue) {
     $classActive = $currentActiveValue == 1 ? 'fa-check-square' : 'fa-square-o';
     return '<a class="btn-action btn-xs btn-active-action" href="'. $link .'"><i class="fa '. $classActive .' fa-2x"></i></a>';
 }
+
+/**
+ * Format tiền tệ
+ * @param  integer $number
+ * @return string
+ */
+function formatCurrency($number) {
+    return number_format($number, 0, '.', '.');
+}

@@ -14,12 +14,9 @@
         <link rel="stylesheet" type="text/css" href="/assets/css/font-awesome/css/font-awesome.min.css">
         <style type="text/css">
             .sidebar {
-                position: fixed;
-                left: 0;
-                top: 0px;
                 background: #fff;
                 border-right: 1px solid #ccc;
-                min-height: 100%;
+                height: 100vh;
             }
         </style>
     </head>
@@ -36,6 +33,7 @@
                         <li><a href="/admin/modules/settings/setting.php">Setting</a></li>
                         <li><a href="/admin/modules/product_category/listing.php">Product Category</a></li>
                         <li><a href="/admin/modules/products/listing.php"><i class="fa fa-cubes"></i> Products</a></li>
+                        <li><a href="/admin/modules/orders/listing.php"><i class="fa fa-database"></i> Orders</a></li>
                     </ul>
                 </div>
-                <div class="col-sm-9 col-sm-offset-3">
+                <div class="col-sm-9 col-md-10">
